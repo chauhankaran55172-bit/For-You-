@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>From My Heart ❤️</title>
+<title>Heartbeat 💗</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -12,159 +13,144 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:radial-gradient(circle,#ffb6c1,#ff6f91);
+  background:radial-gradient(circle at top,#1a1a1a,#000);
   font-family:'Segoe UI',sans-serif;
+  color:#fff;
 }
 
-/* BIG HEART */
-#bigHeart{
-  font-size:160px;
+/* HEART */
+#heart{
+  font-size:140px;
   cursor:pointer;
-  animation:beat 1.2s infinite;
-  z-index:10;
+  filter:drop-shadow(0 0 25px rgba(255,80,120,.8));
+  animation:heartbeat 1.6s infinite;
+  transition:transform .4s ease;
 }
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.3)}
-}
-
-/* BURST */
-.burst{
-  animation:explode .9s forwards;
-}
-@keyframes explode{
-  to{transform:scale(4);opacity:0}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  14%{transform:scale(1.3)}
+  28%{transform:scale(1)}
+  42%{transform:scale(1.3)}
+  70%{transform:scale(1)}
 }
 
-/* BALLOONS */
-.balloon{
-  position:absolute;
-  bottom:-100px;
-  font-size:40px;
-  animation:floatUp 10s linear infinite;
-}
-@keyframes floatUp{
-  0%{transform:translateY(0);opacity:0}
-  10%{opacity:1}
-  100%{transform:translateY(-120vh);opacity:0}
-}
-
-/* CARD */
+/* REVEAL CARD */
 #card{
   display:none;
-  background:rgba(255,255,255,0.95);
-  padding:40px;
-  border-radius:25px;
-  text-align:center;
-  max-width:420px;
-  box-shadow:0 30px 60px rgba(0,0,0,0.25);
-  animation:pop 1s ease;
-}
-@keyframes pop{
-  from{transform:scale(.6);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-h1{color:#ff4d6d}
-p{color:#444;line-height:1.7}
-
-/* PHOTOS */
-.photos{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin:15px 0;
-}
-.photos div{
-  width:70px;
-  height:70px;
-  background:#eee;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-}
-
-/* SPARKLES */
-.sparkle{
   position:absolute;
-  font-size:20px;
-  animation:spark 2s linear infinite;
+  background:rgba(20,20,20,.92);
+  padding:45px;
+  border-radius:28px;
+  text-align:center;
+  max-width:440px;
+  box-shadow:0 40px 90px rgba(255,60,100,.25);
+  animation:cinema 1.2s ease forwards;
 }
-@keyframes spark{
-  from{opacity:1;transform:translateY(0)}
-  to{opacity:0;transform:translateY(-80px)}
+@keyframes cinema{
+  from{transform:scale(.6) translateY(40px);opacity:0}
+  to{transform:scale(1) translateY(0);opacity:1}
+}
+
+h1{
+  font-weight:500;
+  letter-spacing:1px;
+  color:#ff5c8a;
+}
+p{
+  font-size:17px;
+  line-height:1.75;
+  color:#eee;
+}
+
+/* PETALS */
+.petal{
+  position:absolute;
+  top:-40px;
+  font-size:22px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(120vh) rotate(360deg);opacity:0}
+}
+
+/* SPARK */
+.spark{
+  position:absolute;
+  font-size:18px;
+  animation:sparkle 2s ease-out infinite;
+}
+@keyframes sparkle{
+  0%{opacity:1;transform:translateY(0)}
+  100%{opacity:0;transform:translateY(-80px)}
+}
+
+.note{
+  position:absolute;
+  bottom:40px;
+  font-size:14px;
+  opacity:.6;
 }
 </style>
 </head>
 
 <body>
 
-<div id="bigHeart">❤️</div>
+<div id="heart">❤️</div>
+<div class="note">touch the heart</div>
 
 <div id="card">
-  <h1>For You 💖</h1>
+  <h1>Some feelings don’t shout…</h1>
   <p>
-    This is not perfect…<br>
-    but it comes from a very honest place ✨<br><br>
-    I just wanted to create something<br>
-    that makes you smile today 😊
+    They arrive quietly,<br>
+    stay gently,<br>
+    and somehow change everything. ✨<br><br>
+
+    This is one of those moments.<br>
+    Nothing to explain.<br>
+    Nothing to ask.<br><br>
+
+    Just… a heartbeat shared in silence. 💗
   </p>
-
-  <div class="photos">
-    <div>📸</div>
-    <div>💫</div>
-    <div>🎈</div>
-  </div>
-
-  <p><em>You don’t need to say anything…<br>
-  just feel the moment 🌸</em></p>
 </div>
 
 <audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const heart=document.getElementById("bigHeart");
+const heart=document.getElementById("heart");
 const card=document.getElementById("card");
 const music=document.getElementById("music");
 
-/* CLICK HEART */
 heart.onclick=()=>{
-  heart.classList.add("burst");
+  heart.style.display="none";
   music.play();
-
-  setTimeout(()=>{
-    heart.style.display="none";
-    document.body.style.background="linear-gradient(135deg,#ffdde1,#c9f0ff)";
-    card.style.display="block";
-    startBalloons();
-    startSparkles();
-  },800);
+  card.style.display="block";
+  startPetals();
+  startSpark();
 };
 
-/* BALLOONS */
-function startBalloons(){
+/* PETALS */
+function startPetals(){
   setInterval(()=>{
-    const b=document.createElement("div");
-    b.className="balloon";
-    b.innerHTML=["🎈","🎈","💖","🎁"][Math.floor(Math.random()*4)];
-    b.style.left=Math.random()*100+"vw";
-    b.style.animationDuration=(7+Math.random()*5)+"s";
-    document.body.appendChild(b);
-    setTimeout(()=>b.remove(),12000);
-  },500);
+    const p=document.createElement("div");
+    p.className="petal";
+    p.innerHTML=["🌸","💮","✨"][Math.floor(Math.random()*3)];
+    p.style.left=Math.random()*100+"vw";
+    p.style.animationDuration=(8+Math.random()*6)+"s";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),15000);
+  },400);
 }
 
 /* SPARKLES */
-function startSparkles(){
+function startSpark(){
   setInterval(()=>{
     const s=document.createElement("div");
-    s.className="sparkle";
+    s.className="spark";
     s.innerHTML="✨";
-    s.style.left=(50+Math.random()*40-20)+"vw";
-    s.style.top=(60+Math.random()*30)+"vh";
+    s.style.left=(40+Math.random()*20)+"vw";
+    s.style.top=(60+Math.random()*25)+"vh";
     document.body.appendChild(s);
     setTimeout(()=>s.remove(),2000);
   },300);
